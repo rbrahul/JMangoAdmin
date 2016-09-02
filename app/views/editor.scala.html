@@ -1,0 +1,12 @@
+@(document: StringBuilder)
+
+<div id="editor" style="width: 950px;
+    height: 600px;">@document.toString</div>
+
+<script>
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/xcode");
+        var JsonMode = ace.require("ace/mode/json").Mode;
+        editor.session.setMode(new JsonMode());
+        editor.getSession().setTabSize(4);
+</script>

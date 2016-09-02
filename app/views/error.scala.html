@@ -1,0 +1,33 @@
+@(sideMenu: Html, message: String)
+
+<!DOCTYPE html>
+<html lang="en">
+    @head()
+
+<body>
+    <div id="wrapper">
+        @topmenu()
+
+        @sideMenu
+
+        <div id="page-wrapper">
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-lg-6 col-lg-offset-3">
+                        <h1 class="error-msg">Internal Server Error</h1>
+                        <p class="lead">@message</p>
+
+                        <ul class="list-unstyled">
+                            <li>
+                                <a class="btn btn-default" href="@routes.IndexController.index()">Please Refresh</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @tail()
+</body>
+</html>
