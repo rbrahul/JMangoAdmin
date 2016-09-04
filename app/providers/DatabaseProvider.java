@@ -1,7 +1,9 @@
 package providers;
 
+import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
 
 import java.util.ArrayList;
 
@@ -21,11 +23,15 @@ public class DatabaseProvider {
 
     public ArrayList<String> getCollections() {
         ArrayList<String> collections = new ArrayList<>();
-        MongoCursor cursor = database.listCollectionNames().iterator();
+        MongoCursor<String> cursor = database.listCollectionNames().iterator();
         while (cursor.hasNext()) {
-            collections.add((String) cursor.next());
+            collections.add(cursor.next());
         }
 
         return collections;
+    }
+
+    public MongoCollection<Document> getCollection(String name) {
+        return database.getCollection(name);
     }
 }

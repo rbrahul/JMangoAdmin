@@ -1,0 +1,77 @@
+@import org.bson.Document
+@(sideMenu: Html, documents: List[Document], searchQuery: String)
+
+<!DOCTYPE html>
+<html lang="en">
+    @head()
+
+        <body>
+            <script>hljs.initHighlightingOnLoad();</script>
+
+            <div id="wrapper">
+                @topmenu()
+
+                @sideMenu
+
+            <div id="page-wrapper">
+                <div class="page-content">
+
+                        <!-- begin PAGE TITLE ROW -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="page-title">
+                                <h1>Documents</h1>
+                            </div>
+                        </div>
+                            <!-- /.col-lg-12 -->
+                    </div>
+                        <!-- /.row -->
+                        <!-- end PAGE TITLE ROW -->
+
+                    <div class="row">
+                        <div class="col-lg-8">
+                            @for(document <- documents) {
+                                <div class="search-item">
+                                    <span class="sr-name"><a href="/document/edit/@document.getObjectId("_id")">
+                                    @document.getObjectId("_id")</a>
+                                    </span>
+                                    <br>
+                                    <pre><code class="json">@document.toJson</code></pre>
+                                </div>
+                            }
+
+                        <div class="text-center">
+                            <ul class="pagination">
+                                <li><a href="#">&laquo;</a>
+                                </li>
+                                <li class="active"><a href="#">1</a>
+                                </li>
+                                <li><a href="#">2</a>
+                                </li>
+                                <li><a href="#">3</a>
+                                </li>
+                                <li><a href="#">4</a>
+                                </li>
+                                <li><a href="#">5</a>
+                                </li>
+                                <li><a href="#">&raquo;</a>
+                                </li>
+                            </ul>
+                        </div>
+                        </div>
+                            <!-- /.col-lg-6 -->
+                    </div>
+                        <!-- /.row -->
+
+                </div>
+                    <!-- /.page-content -->
+            </div>
+
+            </div>
+                <!-- /#wrapper -->
+
+            @tail()
+
+</body>
+
+</html>

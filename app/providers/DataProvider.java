@@ -11,7 +11,7 @@ import play.Logger;
 
 public class DataProvider {
     private static DataProvider dataProvider;
-    private DataConnection dataConnection;
+    private static DataConnection dataConnection;
 
     private DataProvider() {
         init();
@@ -22,6 +22,11 @@ public class DataProvider {
             dataProvider = new DataProvider();
 
         return dataProvider;
+    }
+
+    public static void reInitiate() {
+        dataConnection.disconnect();
+        dataProvider = new DataProvider();
     }
 
     private void init() {

@@ -3,16 +3,28 @@
 # ~~~~
 
 # Home page
-GET         /                        controllers.IndexController.index()
-GET         /setup                   controllers.SetupController.index()
-POST        /setup                   controllers.SetupController.index()
+GET         /                            controllers.IndexController.index()
+GET         /setup                       controllers.SetupController.index()
+POST        /setup                       controllers.SetupController.index()
 
-GET         /database/:name          controllers.IndexController.setDatabase(name)
-GET         /collection/:name        controllers.IndexController.setCollection(name)
+GET         /database/create             controllers.ConfigController.createDatabase()
+POST        /database/create             controllers.ConfigController.createDatabase()
+GET         /database/set/:name          controllers.IndexController.setDatabase(name)
 
-GET         /error/:error            controllers.IndexController.onError(error)
+GET         /collection/set/:name        controllers.IndexController.setCollection(name)
+
+GET         /document/edit/:id           controllers.IndexController.onEdit(id)
+
+GET         /error/:error                controllers.IndexController.onError(error)
+
+GET         /server/add                  controllers.ConfigController.addServer()
+POST        /server/add                  controllers.ConfigController.addServer()
+
+GET         /credential/add              controllers.ConfigController.addCredential()
+POST        /credential/add              controllers.ConfigController.addCredential()
+
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file            controllers.Assets.at(path="/public", file)
+GET         /assets/*file                controllers.Assets.at(path="/public", file)
 
     

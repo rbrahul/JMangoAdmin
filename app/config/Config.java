@@ -1,7 +1,9 @@
-package providers;
+package config;
 
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
+import play.Logger;
+import utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +15,23 @@ import java.util.List;
  * := Coffee : Dream : Code
  */
 
-public class Configuration {
+public class Config {
     private static List<ServerAddress> serverAddresses = new ArrayList<>();
     private static List<MongoCredential> mongoCredentials = new ArrayList<>();
 
     public static void addServerAddress(String host, String port) {
-        serverAddresses.add(new ServerAddress(host, Integer.parseInt(port)));
+        boolean isExits = false;
+        for (ServerAddress address : serverAddresses) {
+            Logger.info(address.getHost() + ":" + address.getPort());
+
+            if (Utils.isEqual(address.getHost(), host)) {
+                isExits = true;
+                break;
+            }
+        }
+
+        if (!isExits)
+            serverAddresses.add(new ServerAddress(host, Integer.parseInt(port)));
     }
 
     public static List<ServerAddress> getServerAddresses() {

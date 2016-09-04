@@ -1,4 +1,4 @@
-@(sideMenu: Html)
+@(sideMenu: Html, mainContent: Html)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,32 +11,11 @@
         @sideMenu
 
         <div id="page-wrapper">
-            <div class="page-content">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="page-title">
-                            <h1>Document Editor</h1>
-                            <ol class="breadcrumb">
-                                <li><i class="fa fa-dashboard"></i> <a href="index-2.html">localhost</a>
-                                </li>
-                                <li class="active">Database</li>
-                                <li class="active">Collection</li>
-                                <li class="active">Document Id</li>
-                            </ol>
-                        </div>
-                    </div>
-
-                </div>
-
-                    <!-- MAIN CONTENT -->
-            </div>
+        @mainContent
         </div>
-
     </div>
-        <!-- /#wrapper -->
 
     @tail()
-
 </body>
 
 </html>

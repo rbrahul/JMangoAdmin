@@ -13,4 +13,12 @@ public class Utils {
     public static boolean isPostMethod(Http.Request request) {
         return request.method().toLowerCase().contains("post");
     }
+
+    public static boolean isEqual(String x, String y) {
+        return x == y || x.equals(y);
+    }
+
+    public static boolean hasValidParam(String x) {
+        return x != null && !x.trim().isEmpty();
+    }
 }

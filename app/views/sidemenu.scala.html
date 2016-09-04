@@ -10,7 +10,7 @@
                 </a>
                 <ul class="collapse nav" id="charts">
                     @for(name <- databases) {
-                        <li><a href="/database/@name"> @name</a></li>
+                        <li><a href="/database/set/@name"> @name</a></li>
                     }
                 </ul>
             </li>
@@ -21,7 +21,7 @@
                 </a>
                 <ul class="collapse nav in" id="forms">
                 @for(name <- collections) {
-                    <li><a href="/collection/@name"> @name</a></li>
+                    <li><a href="/collection/set/@name"> @name</a></li>
                 }
                 </ul>
             </li>

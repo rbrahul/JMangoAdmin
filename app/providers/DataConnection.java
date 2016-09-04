@@ -5,6 +5,7 @@ import com.mongodb.MongoClientOptions;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.event.*;
+import config.Config;
 import play.Logger;
 
 import java.util.ArrayList;
@@ -30,14 +31,14 @@ public class DataConnection implements ServerListener, ServerMonitorListener {
                     .addServerMonitorListener(this)
                     .build();
 
-            if (Configuration.getServerAddresses().isEmpty()) {
-                Configuration.addServerAddress("localhost", "27017");
+            if (Config.getServerAddresses().isEmpty()) {
+                Config.addServerAddress("localhost", "27017");
             }
 
-            if (Configuration.getMongoCredentials().isEmpty()) {
-                client = new MongoClient(Configuration.getServerAddresses(), clientOptions);
+            if (Config.getMongoCredentials().isEmpty()) {
+                client = new MongoClient(Config.getServerAddresses(), clientOptions);
             } else {
-                client = new MongoClient(Configuration.getServerAddresses(), Configuration.getMongoCredentials(), clientOptions);
+                client = new MongoClient(Config.getServerAddresses(), Config.getMongoCredentials(), clientOptions);
             }
 
             return true;
@@ -65,9 +66,9 @@ public class DataConnection implements ServerListener, ServerMonitorListener {
 
     public ArrayList<String> getDatabases() {
         ArrayList<String> databases = new ArrayList<>();
-        MongoCursor mongoCursor = client.listDatabaseNames().iterator();
+        MongoCursor<String> mongoCursor = client.listDatabaseNames().iterator();
         while (mongoCursor.hasNext()) {
-            databases.add((String) mongoCursor.next());
+            databases.add(mongoCursor.next());
         }
         return databases;
     }
