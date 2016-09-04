@@ -1,8 +1,26 @@
 @import org.bson.Document
 @(document: Document)
 
-<div id="editor" style="width: 950px;
-    height: 600px;">@document.toString</div>
+<div id="editor" contenteditable="true" style="width: 950px;
+    height: 600px;">@document.toJson()</div>
+
+<br>
+
+<div class="col-lg-4 form-group">
+    <form method="post" action="" enctype="application/x-www-form-urlencoded">
+        <input type="hidden" id="update-value" name="update-value">
+        <input class="btn btn-lg btn-green btn-block" type="submit" id="update-btn" name="update-btn" value="Update">
+    </form>
+</div>
+
+<script>
+    $(function () {
+        $('#update-btn').click(function () {
+            var doc = $('#editor').text();
+            $('#update-value').val(doc);
+        });
+    });
+</script>
 
 <script>
         var editor = ace.edit("editor");

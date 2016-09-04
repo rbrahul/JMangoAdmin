@@ -14,6 +14,7 @@ GET         /database/set/:name          controllers.IndexController.setDatabase
 GET         /collection/set/:name        controllers.IndexController.setCollection(name)
 
 GET         /document/edit/:id           controllers.IndexController.onEdit(id)
+POST        /document/edit/:id           controllers.IndexController.onEdit(id)
 
 GET         /error/:error                controllers.IndexController.onError(error)
 

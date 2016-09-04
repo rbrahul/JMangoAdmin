@@ -1,6 +1,10 @@
 package controllers;
 
+import org.apache.commons.logging.Log;
 import org.bson.Document;
+import play.Logger;
+import play.data.DynamicForm;
+import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
@@ -9,6 +13,7 @@ import providers.CollectionProvider;
 import providers.DataConnection;
 import providers.DataProvider;
 import providers.DatabaseProvider;
+import utils.Utils;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -70,11 +75,24 @@ public class IndexController extends Controller {
                 DatabaseProvider databaseProvider = new DatabaseProvider(dataConnection.getDatabase(database.value()));
                 CollectionProvider collectionProvider = new CollectionProvider(databaseProvider);
                 collectionProvider.setCollection(collection.value());
-                Document document = collectionProvider.getDocument(docId);
-                if (document != null) {
 
+                if (Utils.isPostMethod(request())) {
+                    DynamicForm data = Form.form().bindFromRequest();
+
+                    if (Utils.hasValidParam(data.get("update-value"))) {
+                        Logger.info(data.get("update-value"));
+                    } else {
+                        Logger.info("No Update Value");
+                    }
                 } else {
-                    return onError("Document not found");
+
+                    Document document = collectionProvider.getDocument(docId);
+                    if (document != null) {
+                        Html sidemenu = views.html.sidemenu.render(dataConnection.getDatabases(), databaseProvider.getCollections());
+                        return ok(views.html.index.render(sidemenu, views.html.editor.render(document)));
+                    } else {
+                        return onError("Document not found");
+                    }
                 }
             }
         }
