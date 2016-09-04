@@ -42,7 +42,11 @@ public class CollectionProvider {
     }
 
     public Document getDocument(String docId) {
-        return collection.find(new Document("_id", new ObjectId(docId))).first();
+        try {
+            return collection.find(new Document("_id", new ObjectId(docId))).first();
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
     public List<Document> findDocument() {

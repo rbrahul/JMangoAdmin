@@ -1,26 +1,28 @@
 @import org.bson.Document
 @(document: Document)
 
-<div id="editor" contenteditable="true" style="width: 950px;
-    height: 600px;">@document.toJson()</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<script>
+        $(document).ready(function () {
+            $("#set").click(function () {
+                var value = $("#editor").text();
+                $("form").append("<input type='hidden' name='update-value' value='" + value + "'><br>");
+            });
+        });
+</script>
+
+<div id="editor" style="width: 950px;
+    height: 400px;">@document.toJson().replace(",", ",\n")</div>
 
 <br>
 
 <div class="col-lg-4 form-group">
     <form method="post" action="" enctype="application/x-www-form-urlencoded">
-        <input type="hidden" id="update-value" name="update-value">
+        <input class="btn btn-lg btn-green btn-block" type="button" name="set" id="set" value="Set">
         <input class="btn btn-lg btn-green btn-block" type="submit" id="update-btn" name="update-btn" value="Update">
     </form>
 </div>
-
-<script>
-    $(function () {
-        $('#update-btn').click(function () {
-            var doc = $('#editor').text();
-            $('#update-value').val(doc);
-        });
-    });
-</script>
 
 <script>
         var editor = ace.edit("editor");

@@ -80,7 +80,9 @@ public class IndexController extends Controller {
                     DynamicForm data = Form.form().bindFromRequest();
 
                     if (Utils.hasValidParam(data.get("update-value"))) {
-                        Logger.info(data.get("update-value"));
+                        String updateValue = data.get("update-value");
+                        updateValue = updateValue.substring(updateValue.indexOf("{"), updateValue.lastIndexOf("}") + 1);
+                        Logger.info(updateValue);
                     } else {
                         Logger.info("No Update Value");
                     }
