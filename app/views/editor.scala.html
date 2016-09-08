@@ -4,12 +4,19 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 <script>
-        $(document).ready(function () {
-            $("#set").click(function () {
-                var value = $("#editor").text();
-                $("form").append("<input type='hidden' name='update-value' value='" + value + "'><br>");
-            });
-        });
+    $(document).ready(function () {
+        /*    $("#set").click(function () {
+         var value = $("#editor").text();
+         $("form").append("<input type='hidden' name='update-value' value='" + value + "'><br>");
+         });*/
+        $("#json-form").submit(function(e){
+            e.preventDefault();
+            var value = $("#editor").text();
+            $("#update-value").val(value);
+            console.info($("#update-value").val());
+            return true;
+        })
+    });
 </script>
 
 <div id="editor" style="width: 950px;
@@ -18,16 +25,17 @@
 <br>
 
 <div class="col-lg-4 form-group">
-    <form method="post" action="" enctype="application/x-www-form-urlencoded">
-        <input class="btn btn-lg btn-green btn-block" type="button" name="set" id="set" value="Set">
+    <form method="post" action="" id="json-form" enctype="application/x-www-form-urlencoded">
+        <input type='hidden' name='update-value' id="update-value" value=''>
+        <!-- <input class="btn btn-lg btn-green btn-block" type="button" name="set" id="set" value="Set">-->
         <input class="btn btn-lg btn-green btn-block" type="submit" id="update-btn" name="update-btn" value="Update">
     </form>
 </div>
 
 <script>
-        var editor = ace.edit("editor");
-        editor.setTheme("ace/theme/xcode");
-        var JsonMode = ace.require("ace/mode/json").Mode;
-        editor.session.setMode(new JsonMode());
-        editor.getSession().setTabSize(4);
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/xcode");
+    var JsonMode = ace.require("ace/mode/json").Mode;
+    editor.session.setMode(new JsonMode());
+    editor.getSession().setTabSize(4);
 </script>
